@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Push To Yandex Cloud CR
 
 # Controls when the action will run. 
 on:
@@ -31,7 +31,7 @@ jobs:
         env:
           CR_REGISTRY: crpk28lsfu91rns28316
           CR_REPOSITORY: yc-cr-github-action
-          MAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
