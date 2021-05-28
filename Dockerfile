@@ -1,13 +1,16 @@
 FROM node:16 AS builder
-RUN apk --no-cache add --virtual native-deps \
-  g++ gcc libgcc libstdc++ linux-headers autoconf automake make nasm python git && \
-  npm install --quiet node-gyp -g
 COPY ./package.json /
+COPY ./tsconfig.json /
 COPY ./package-lock.json /
-RUN npm i --verbose --only=production
+COPY ./src ./src
+RUN npm i --verbose
+RUN npm run build
 
 FROM node:16
-WORKDIR /root/
-COPY --from=builder /node_modules /app/node_modules
-COPY ./dist/app /app
-CMD node /app/index.js
+COPY --from=builder /package*.json /
+RUN npm i --verbose --only=production
+COPY --from=builder /dist /
+
+EXPOSE 3000
+
+CMD node index.js
