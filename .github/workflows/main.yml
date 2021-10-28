@@ -40,7 +40,7 @@ jobs:
           
       - name: Deploy Serverless Container
         id: deploy-sls-container
-        uses: yc-actions/yc-sls-container-deploy@v1
+        uses: yc-actions/yc-sls-container-deploy@v1.0.2
         env:
           CR_REGISTRY: crpk28lsfu91rns28316
           CR_REPOSITORY: yc-cr-github-action
@@ -54,5 +54,5 @@ jobs:
           revision-memory: 512Mb
           revision-core-fraction: 100
           revision-concurrency: 8
-          revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+          revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           revision-execution-timeout: 10
