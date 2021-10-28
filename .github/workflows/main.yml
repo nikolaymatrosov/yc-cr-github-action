@@ -40,7 +40,7 @@ jobs:
           
       - name: Deploy Serverless Container
         id: deploy-sls-container
-        uses: yc-actions/yc-sls-container-deploy@v1.0.2
+        uses: yc-actions/yc-sls-container-deploy@v1
         env:
           CR_REGISTRY: crpk28lsfu91rns28316
           CR_REPOSITORY: yc-cr-github-action
