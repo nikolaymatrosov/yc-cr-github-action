@@ -37,32 +37,3 @@ jobs:
         run: |
           docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
-      - name: Yandex Cloud Lockbox
-        id: lockbox
-        # You may pin to the exact commit or the version.
-        # uses: yc-actions/yc-lockbox@0fa56d417cda323c26482299edbc5fcc9007a9d4
-        uses: yc-actions/yc-lockbox@v1
-        with:
-          yc-sa-json-credentials:  ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          secret-id: e6qmvapprqusl70qjbrq
-      - name: Get the output time
-        run: echo "The time was ${{ steps.lockbox.outputs.text }}"
-          
-#       - name: Deploy Serverless Container
-#         id: deploy-sls-container
-#         uses: yc-actions/yc-sls-container-deploy@v1
-#         env:
-#           CR_REGISTRY: crpk28lsfu91rns28316
-#           CR_REPOSITORY: yc-cr-github-action
-#           IMAGE_TAG: ${{ github.sha }}
-#         with:
-#           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-#           container-name: yc-action-demo
-#           folder-id: ${{ secrets.FOLDER_ID }}
-#           revision-service-account-id: ${{ secrets.SA_ID }}
-#           revision-cores: 1
-#           revision-memory: 512Mb
-#           revision-core-fraction: 100
-#           revision-concurrency: 8
-#           revision-image-url: cr.yandex/${{ env.CR_REGISTRY }}/${{ env.CR_REPOSITORY }}:${{ env.IMAGE_TAG }}
-#           revision-execution-timeout: 10
